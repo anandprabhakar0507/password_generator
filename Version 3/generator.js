@@ -1,10 +1,7 @@
 const btnGenerate = document.getElementById("btnGeneratePassword");
 const txtResult = document.getElementById("result");
 const txtPWLength = document.getElementById("txtPWLength");
-/*const specialChars = document.getElementById("specialChars");
-const numbers = document.getElementById("numbers");
-const upperChars = document.getElementById("upperChars");
-*/
+
 
 btnGenerate.addEventListener('click', function(){
     // Get PW Length
@@ -12,16 +9,17 @@ btnGenerate.addEventListener('click', function(){
     if(!isNaN(length)  && length < 130) {
         let out = "";
         let limits = [];
+        if($('#specialChars').prop('checked')){
+            limits.push("special");
+        } 
+        if($('#numbers').prop('checked')){
+            limits.push("numbers");
+        } 
+        if($('#upperChars').prop('checked')){
+            limits.push("upper");
+        }
+        console.log(limits);    
         for(let x = 0; x < length; x++){
-            if($('#specialChars').prop('checked')){
-                limits.push("special");
-            } 
-            if($('#numbers').prop('checked')){
-                limits.push("numbers");
-            } 
-            if($('#upperChars').prop('checked')){
-                limits.push("upper");
-            }
             
             //Generate random number within proper boundaries
             let num = generatePWCharacter(limits);
@@ -32,7 +30,7 @@ btnGenerate.addEventListener('click', function(){
         txtResult.innerHTML = "<h1>" + out + "</h1>";
     } else {
         console.log("error");
-        alert("Error. Must be a number less than 129.")
+        alert("Error. Must be a number less than 129.");
     }
 });
 
@@ -49,6 +47,7 @@ function generatePWCharacter(limits){
             if(item == "upper"){
             scratch.push(65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90);
             }
+            console.log(scratch);
         });
     let status = "X";
     let num = 0;

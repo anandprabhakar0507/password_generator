@@ -9,7 +9,7 @@ btnGenerate.addEventListener('click', function(){
         let out = "";
         for(let x = 0; x < length; x++){
             //Generate a random number between 33 and 126
-            let num = randomNumber(33,126)
+            let num = randomNumber(33,126);
             out += String.fromCharCode(num);
         }
         console.log(out);
